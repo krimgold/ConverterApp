@@ -29,7 +29,7 @@ namespace ConverterApp.Converters
 		{
 			if (conversions == null)
 			{
-				throw new ArgumentNullException("Please provide correct conversions.");
+				throw new ArgumentNullException("Please provide conversions.");
 			}
 
 			var fromArgs = from.Split(" ");
@@ -52,24 +52,6 @@ namespace ConverterApp.Converters
 			return $"{convertionResult} {to}";
 		}
 
-		private double GetRatio(string fromUnits, string to, Dictionary<string, double> conversions)
-		{
-			var fromPrefix = GetMetricPrefix(fromUnits);
-			var toPrefix = GetMetricPrefix(to);
-
-			var fromBasicUnits = fromUnits.TrimStart(fromPrefix.ToCharArray());
-			var toUnits = to.TrimStart(toPrefix.ToCharArray());
-
-			var fromTo = $"{fromBasicUnits} to {toUnits}".ToLower();
-
-			if (!conversions.TryGetValue(fromTo, out double ratio))
-			{
-				throw new ArgumentException($"Please provide correct conversion units. Cannot convert {fromTo}");
-			}
-
-			return ratio;
-		}
-
 		private decimal GetNumericPrefix(string units)
 		{
 			var prefix = GetMetricPrefix(units);
@@ -77,6 +59,24 @@ namespace ConverterApp.Converters
 			var conversionRate = (String.IsNullOrEmpty(prefix) ? 1 : metricPrefices[prefix]);
 
 			return conversionRate;
+		}
+
+		private double GetRatio(string fromUnits, string to, Dictionary<string, double> conversions)
+		{
+			var fromPrefix = GetMetricPrefix(fromUnits);
+			var toPrefix = GetMetricPrefix(to);
+
+			var fromBasicUnits = fromUnits.TrimStart(fromPrefix.ToCharArray());
+			var toBasicUnits = to.TrimStart(toPrefix.ToCharArray());
+
+			var fromTo = $"{fromBasicUnits} to {toBasicUnits}".ToLower();
+
+			if (!conversions.TryGetValue(fromTo, out double ratio))
+			{
+				throw new ArgumentException($"Please provide correct conversion units. Cannot convert {fromTo}");
+			}
+
+			return ratio;
 		}
 
 		private string GetMetricPrefix(string metric)

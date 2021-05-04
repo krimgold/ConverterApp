@@ -29,6 +29,13 @@ namespace ConverterTests
 		}
 
 		[TestMethod]
+		public void ConvertFootToFoot_ShouldNotFail()
+		{
+			var result = NumericConverter.ConvertLength("1 decifoot", "kilofoot");
+			Assert.AreEqual(result, "0.0001 kilofoot");
+		}
+
+		[TestMethod]
 		public void ConvertNulls_ShouldFail()
 		{
 			Assert.ThrowsException<ArgumentException>(() => NumericConverter.ConvertLength(null, null));

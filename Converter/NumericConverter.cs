@@ -19,7 +19,7 @@ namespace Converter
 		{
 			if (String.IsNullOrEmpty(from) || String.IsNullOrEmpty(to))
 			{
-				throw new ArgumentException("Please provide correct arguments.");
+				throw new ArgumentException("Please provide correct number and conversion units");
 			}
 
 			try
@@ -29,7 +29,7 @@ namespace Converter
 			}
 			catch (Exception ex)
 			{
-				throw ex;
+				throw new ArgumentException("Please provide correct number and conversion units");
 			}
 			
 		}
@@ -44,7 +44,7 @@ namespace Converter
 		{
 			if (String.IsNullOrEmpty(from) || String.IsNullOrEmpty(to))
 			{
-				throw new ArgumentException("Please provide correct arguments.");
+				throw new ArgumentException("Please provide correct number and conversion units");
 			}
 
 			try
@@ -54,7 +54,7 @@ namespace Converter
 			}
 			catch (Exception ex)
 			{
-				throw ex;
+				throw new ArgumentException("Please provide correct number and conversion units");
 			}
 		}
 	}
